@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Overview
 
-## Getting Started
+This project is a full-stack web application built as part of a task. The task involves creating a CRUDS (Create, Read, Update, Delete, and Send) application with the following features:
 
-First, run the development server:
+- A UI with a form, table, and buttons for CRUDS operations.
+- MongoDB for the database.
+- Node.js and Express.js for creating APIs.
+- React.js for the frontend.
+- Sending data to the email address info@redpositive.in.
+- Hosting the application on either Heroku or Netlify.
+- Code hosted on GitHub.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Task Requirements
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Frontend (React.js)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Form:**
+   - Fields: Name, Phone number, Email, Hobbies.
+   - Save button to add new entries to the database.
+   - Add button to open a pop-up form for adding new entries.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Table:**
+   - Attributes: Select (checkbox attribute), ID, Name, Phone Number, Email, Hobbies, Update/Delete buttons.
+   - Display data from the MongoDB database.
+   - Update and delete entries.
 
-## Learn More
+3. **Buttons:**
+   - **Send:** Sends data of selected row/rows to email info@redpositive.in.
+   - **Add New Data:** Opens a pop-up form to add a new entry to the table.
 
-To learn more about Next.js, take a look at the following resources:
+4. **Validation:**
+   - Provide validations for all fields in the form.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend (Node.js and Express.js)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **APIs:**
+   - Create APIs for CRUDS operations (Create, Read, Update, Delete, and Send).
 
-## Deploy on Vercel
+2. **Database:**
+   - Use MongoDB for creating and managing the database.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. **Hosting:**
+   - Host the application on either Heroku or Netlify.
+
+2. **GitHub:**
+   - Push the code to a public GitHub repository.
