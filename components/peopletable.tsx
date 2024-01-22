@@ -26,12 +26,15 @@ import PersonForm from "./personform";
 
 const Peopletable = () => {
   const [persons, setPersons] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(false);
 
   const getPersons = async () => {
+    setLoading(true);
     try {
       const response = await fetch("/api/getpeople");
       const data = await response.json();
       setPersons(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +45,7 @@ const Peopletable = () => {
   }, []);
 
   const deletePerson = async (email: string) => {
+
     try {
       const response = await fetch("/api/deletepeople", {
         method: "POST",
@@ -88,74 +92,84 @@ const Peopletable = () => {
 
   return (
     <div className=" w-full mx-auto">
-      <Table>
-        <TableCaption>A list of hobbies and interests</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">SN</TableHead>
-            <TableHead className="">Name</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead className="">Hobbies</TableHead>
-            <TableHead className="">Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {persons.map((item: any, index: any) => (
-            <TableRow key={item.name}>
-              <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.phone}</TableCell>
-              <TableCell className="">{item.email}</TableCell>
-              <TableCell className="">{item.hobbies}</TableCell>
-              <TableCell className="">
-                <span className="flex gap-2">
-                  <Dialog>
-                    <DialogTrigger>
-                      <Button>Edit</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <PersonForm data={item} />
-                    </DialogContent>
-                  </Dialog>
-                  <Button onClick={() => sendEmail(item.email, item)}>
-                    Send Email
-                  </Button>
-                  <Dialog>
-                    <DialogTrigger>
-                      <Button variant={"destructive"}>Delete</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Delete Person</DialogTitle>
-                      </DialogHeader>
-                      <DialogDescription className="flex flex-col flex-1">
-                        Are you sure you want to delete this person?
-                        <p className="text-red-500">
-                          This action cannot be undone.
-                        </p>
-                      </DialogDescription>
-
-                      <Button
-                        variant={"destructive"}
-                        onClick={() => deletePerson(item.email)}
-                      >
-                        Yes
+      {!loading ? (
+        <>
+          <Table>
+            <TableCaption>A list of hobbies and interests</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">SN</TableHead>
+                <TableHead className="">Name</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead className="">Hobbies</TableHead>
+                <TableHead className="">Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {persons.map((item: any, index: any) => (
+                <TableRow key={item.name}>
+                  <TableCell className="font-medium">{index + 1}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.phone}</TableCell>
+                  <TableCell className="">{item.email}</TableCell>
+                  <TableCell className="">{item.hobbies}</TableCell>
+                  <TableCell className="">
+                    <span className="flex gap-2">
+                      <Dialog>
+                        <DialogTrigger>
+                          <Button>Edit</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <PersonForm data={item} />
+                        </DialogContent>
+                      </Dialog>
+                      <Button onClick={() => sendEmail(item.email, item)}>
+                        Send Email
                       </Button>
-                    </DialogContent>
-                  </Dialog>
-                </span>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={50}>Total</TableCell>
-            <TableCell className="text-right">{persons.length}</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
+                      <Dialog>
+                        <DialogTrigger>
+                          <Button variant={"destructive"}>Delete</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Delete Person</DialogTitle>
+                          </DialogHeader>
+                          <DialogDescription className="flex flex-col flex-1">
+                            Are you sure you want to delete this person?
+                            <p className="text-red-500">
+                              This action cannot be undone.
+                            </p>
+                          </DialogDescription>
+
+                          <Button
+                            variant={"destructive"}
+                            onClick={() => deletePerson(item.email)}
+                          >
+                            Yes
+                          </Button>
+                        </DialogContent>
+                      </Dialog>
+                    </span>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={50}>Total</TableCell>
+                <TableCell className="text-right">{persons.length}</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </>
+      ) : (
+        <div>
+          <div>
+            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-rose-600 mx-auto"></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

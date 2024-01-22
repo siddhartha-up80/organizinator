@@ -28,7 +28,7 @@ export default function Navbarcenter() {
               <Flower2 />
             </Link>
           ) : null}
-          <div className="flex">
+          <div className="flex mr-3 font-semibold">
             <div
               className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
                 state ? "block" : "hidden"
@@ -46,18 +46,9 @@ export default function Navbarcenter() {
               </ul>
             </div>
           </div>
-          <div className="items-center flex-shrink-0 hidden lg:flex ml-6">
-            <Dialog>
-              <DialogTrigger>
-                <Button className="px-8 py-2 font-semibold rounded hover:bg-rose-600 text-gray-50">
-                  Add New Person
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <PersonForm adding={true} />
-              </DialogContent>
-            </Dialog>
-          </div>
+          {/* <div className="items-center flex-shrink-0 hidden lg:flex ml-6">
+            
+          </div> */}
           <button
             className="p-2 lg:hidden flex md:justify-center justify-start"
             title="menu"
